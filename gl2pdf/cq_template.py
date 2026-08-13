@@ -26,6 +26,7 @@ SEVERITY_COLOR: dict[str, str] = {
 _LABELS: dict[str, dict[str, str]] = {
     "en": {
         "default_title":  "Code Quality Report",
+        "kicker":         "gl2pdf Code Quality Report",
         "confidential":   "CONFIDENTIAL – AUTHORIZED PERSONNEL ONLY",
         "report_date":    "Report Date",
         "source_file":    "Source File",
@@ -70,6 +71,7 @@ _LABELS: dict[str, dict[str, str]] = {
     },
     "tr": {
         "default_title":  "Kod Kalitesi Raporu",
+        "kicker":         "gl2pdf Code Quality Raporu",
         "confidential":   "GİZLİ – YETKİLİ KİŞİLERE ÖZEL",
         "report_date":    "Rapor Tarihi",
         "source_file":    "Kaynak Dosya",

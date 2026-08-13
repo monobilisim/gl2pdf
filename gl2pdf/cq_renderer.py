@@ -155,12 +155,13 @@ class _Doc(BaseDocTemplate):
 # ── Cover ─────────────────────────────────────────────────────────────────────
 
 class _Cover(Flowable):
-    def __init__(self, report: CqReport, title: str, repo: str | None, lang: str):
+    def __init__(self, report: CqReport, title: str, repo: str | None, lang: str, kicker: str | None = None):
         super().__init__()
         self.report = report
         self.title  = title
         self.repo   = repo
         self.lang   = lang
+        self.kicker = kicker
 
     def wrap(self, aw, ah):
         return (PAGE_W, PAGE_H)
@@ -177,6 +178,10 @@ class _Cover(Flowable):
         c.rect(0, 0, PAGE_W, 6, fill=1, stroke=0)
 
         cy = PAGE_H * 0.62
+        if self.kicker:
+            c.setFont(FONT_REG, 11)
+            c.setFillColor(HexColor("#6b7280"))
+            c.drawCentredString(cx, cy + 9 * mm, self.kicker)
         c.setFont(FONT_BOLD, 26)
         c.setFillColor(HexColor("#1a1a1a"))
         c.drawCentredString(cx, cy, self.title)
@@ -523,11 +528,12 @@ def _build_story(report: CqReport, title: str | None, repo: str | None, lang: st
     if lang not in _LABELS:
         lang = "en"
     cover_title = title or _L(lang, "default_title")
+    kicker = _L(lang, "kicker") if title else None
     st = _styles()
 
     story = []
     story.append(NextPageTemplate("cover"))
-    story.append(_Cover(report, cover_title, repo, lang))
+    story.append(_Cover(report, cover_title, repo, lang, kicker))
     story.append(NextPageTemplate("normal"))
     story.append(PageBreak())
 

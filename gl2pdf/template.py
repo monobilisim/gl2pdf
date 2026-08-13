@@ -30,6 +30,7 @@ SEVERITY_COLOR: dict[str, str] = {
 _LABELS: dict[str, dict[str, str]] = {
     "en": {
         "default_title":    "SAST Security Report",
+        "kicker":           "gl2pdf SAST Report",
         "confidential":     "CONFIDENTIAL – AUTHORIZED PERSONNEL ONLY",
         "analyzer":         "Analyzer",
         "scanner":          "Scanner",
@@ -72,6 +73,7 @@ _LABELS: dict[str, dict[str, str]] = {
     },
     "tr": {
         "default_title":    "SAST Güvenlik Raporu",
+        "kicker":           "gl2pdf SAST Raporu",
         "confidential":     "GİZLİ – YETKİLİ KİŞİLERE ÖZEL",
         "analyzer":         "Analiz Motoru",
         "scanner":          "Tarayıcı",
