@@ -57,6 +57,8 @@ app = FastAPI(
     version=__version__,
     docs_url="/docs",
     redoc_url="/redoc",
+    contact={"name": "gl2pdf on GitHub", "url": "https://github.com/monobilisim/gl2pdf"},
+    license_info={"name": "GPL-3.0-or-later", "url": "https://github.com/monobilisim/gl2pdf/blob/main/LICENSE"},
 )
 
 app.include_router(admin_router)
@@ -83,8 +85,8 @@ async def on_startup() -> None:
 @app.get("/", include_in_schema=False)
 def root() -> RedirectResponse:
     # ponytail: reuse FastAPI's auto-generated Swagger UI as the "how do I use
-    # this API" page instead of hand-writing one.
-    return RedirectResponse(url="/docs")
+    # this API" page instead of hand-writing one. 308 = permanent, keeps GET.
+    return RedirectResponse(url="/docs", status_code=308)
 
 
 # ── Probes (no auth) ──────────────────────────────────────────────────────────
