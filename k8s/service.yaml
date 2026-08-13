@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gl2pdf
+  namespace: gl2pdf
+  labels:
+    app: gl2pdf
+spec:
+  selector:
+    app: gl2pdf
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP
+  type: ClusterIP

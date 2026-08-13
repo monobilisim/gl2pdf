@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gl2pdf
+  namespace: gl2pdf
+spec:
+  entryPoints:
+    - websecure          # Traefik HTTPS entrypoint name (usually websecure)
+  routes:
+    - match: Host(`gl2pdf.YOURDOMAIN.com`)   # <-- change the domain name
+      kind: Rule
+      services:
+        - name: gl2pdf
+          port: 80
+  # You can remove the tls block if you have a global TLS configuration;
+  # uncomment below if using cert-manager or a wildcard cert:
+  # tls:
+  #   secretName: gl2pdf-tls

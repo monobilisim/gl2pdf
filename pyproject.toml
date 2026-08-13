@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gl2pdf"
+version = "1.0.0"
+description = "Turn GitLab SAST & Code Quality scan results into clean, shareable PDF reports — CLI + API"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "GPL-3.0-or-later" }
+dependencies = [
+    "reportlab>=4.0",
+    "click>=8",
+    "rich>=13",
+    "fastapi>=0.111",
+    "uvicorn[standard]>=0.29",
+    "python-multipart>=0.0.9",
+    "sqlalchemy[asyncio]>=2.0",
+    "aiomysql>=0.2",
+    "aiosqlite>=0.20",
+    "passlib[bcrypt]>=1.7",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "httpx>=0.27"]
+dev = ["pyinstaller>=6"]
+
+[project.scripts]
+gl2pdf = "gl2pdf.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gl2pdf*"]
