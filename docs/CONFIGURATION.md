@@ -8,6 +8,7 @@ Environment variables read by the HTTP API (`gl2pdf.api:app`). The CLI takes all
 |----------|----------|---------|---------|
 | `ADMIN_TOKEN` | Only for `/admin/*` | *(unset)* | `gl2pdf/auth.py` |
 | `DB_URL` | no | `sqlite+aiosqlite:///./gl2pdf.db` | `gl2pdf/db.py` |
+| `MAX_UPLOAD_BYTES` | no | `20971520` (20 MB) | `gl2pdf/api.py` |
 
 ### `ADMIN_TOKEN`
 
@@ -41,6 +42,12 @@ mysql+aiomysql://user:pass@host:3306/gl2pdf
 ```
 
 The `aiomysql` driver is already a declared dependency (`pyproject.toml`), no extra install needed.
+
+### `MAX_UPLOAD_BYTES`
+
+Maximum request body size, in bytes, accepted by `POST /convert`. Requests over the limit are rejected with `413 Request Entity Too Large` — checked against the `Content-Length` header before the body is read, and again against the actual body size as a fallback.
+
+Default is `20971520` (20 MB), chosen to stay comfortably inside the container's memory limit (`resources.limits.memory: 1Gi` in `k8s/deployment.yaml`) even after accounting for JSON parsing and PDF rendering overhead on top of the raw upload. Raise it only if you also raise the container memory limit — the two are meant to be tuned together, see [Deployment Guide](DEPLOYMENT.md).
 
 ## Per-environment defaults
 

@@ -98,4 +98,5 @@ The response includes `raw_key` — this is shown **only once**. Store it now; o
 
 - **Pods `CrashLoopBackOff`** — check `kubectl -n gl2pdf logs`. Most commonly `DB_URL` is unreachable (network policy / wrong host) or malformed.
 - **`/admin/*` returns 503** — `ADMIN_TOKEN` is not set in the pod's environment; check the secret was applied and referenced correctly in `deployment.yaml`.
+- **Large reports return `413`** — `POST /convert` caps request bodies at `MAX_UPLOAD_BYTES` (default 20 MB, see [Configuration](CONFIGURATION.md#max_upload_bytes)). This is intentionally well under the container's `resources.limits.memory: 1Gi` in `deployment.yaml`, so a large upload fails cleanly with `413` instead of the pod getting OOM-killed. If you need to accept bigger reports, raise both `MAX_UPLOAD_BYTES` and the memory limit together.
 - **API keys "disappear" intermittently** — you're on SQLite with `replicas > 1`. Switch to MySQL or drop to a single replica.

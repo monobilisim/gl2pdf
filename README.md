@@ -125,6 +125,7 @@ ADMIN_TOKEN=your-secret-token uvicorn gl2pdf.api:app --host 0.0.0.0 --port 8080
 |----------|-------------|---------|
 | `ADMIN_TOKEN` | Bearer token for `/admin/*` endpoints | *(required)* |
 | `DB_URL` | SQLAlchemy async connection string | `sqlite+aiosqlite:///./gl2pdf.db` |
+| `MAX_UPLOAD_BYTES` | Max `/convert` request body size (bytes) before `413` | `20971520` (20 MB) |
 
 ### Endpoints
 
