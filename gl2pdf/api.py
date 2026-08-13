@@ -26,7 +26,7 @@ import tempfile
 from pathlib import Path
 
 from fastapi import Depends, FastAPI, HTTPException, Request, status
-from fastapi.responses import Response
+from fastapi.responses import RedirectResponse, Response
 
 from . import __version__
 from .admin import router as admin_router
@@ -76,6 +76,15 @@ async def on_startup() -> None:
         logger.exception("Database initialization failed")
         raise
     logger.info("Database ready.")
+
+
+# ── Root ──────────────────────────────────────────────────────────────────────
+
+@app.get("/", include_in_schema=False)
+def root() -> RedirectResponse:
+    # ponytail: reuse FastAPI's auto-generated Swagger UI as the "how do I use
+    # this API" page instead of hand-writing one.
+    return RedirectResponse(url="/docs")
 
 
 # ── Probes (no auth) ──────────────────────────────────────────────────────────
