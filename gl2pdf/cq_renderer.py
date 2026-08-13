@@ -247,7 +247,14 @@ class _Cover(Flowable):
 
         c.setFont(FONT_REG, 7)
         c.setFillColor(HexColor("#aaaaaa"))
-        c.drawCentredString(cx, 14 * mm, "gl2pdf")
+        label = "gl2pdf"
+        c.drawCentredString(cx, 14 * mm, label)
+        text_width = c.stringWidth(label, FONT_REG, 7)
+        c.linkURL(
+            "https://github.com/monobilisim/gl2pdf",
+            (cx - text_width / 2, 14 * mm - 1, cx + text_width / 2, 14 * mm + 7),
+            relative=0,
+        )
 
 
 # ── Section helper ────────────────────────────────────────────────────────────
@@ -473,7 +480,7 @@ def _recommendations(report: CqReport, lang: str, st: dict) -> list:
         story.append(Spacer(1, 16))
         now = datetime.now().strftime("%d %B %Y %H:%M")
         story.append(Paragraph(
-            f"gl2pdf  |  {now}",
+            f'<link href="https://github.com/monobilisim/gl2pdf">gl2pdf</link>  |  {now}',
             ParagraphStyle("fn", fontName=FONT_REG, fontSize=7,
                            textColor=HexColor("#94a3b8"), alignment=1),
         ))
@@ -503,7 +510,7 @@ def _recommendations(report: CqReport, lang: str, st: dict) -> list:
     story.append(Spacer(1, 16))
     now = datetime.now().strftime("%d %B %Y %H:%M")
     story.append(Paragraph(
-        f"gl2pdf  |  {now}",
+        f'<link href="https://github.com/monobilisim/gl2pdf">gl2pdf</link>  |  {now}',
         ParagraphStyle("fn", fontName=FONT_REG, fontSize=7,
                        textColor=HexColor("#94a3b8"), alignment=1),
     ))

@@ -27,6 +27,9 @@ LABEL org.opencontainers.image.title="gl2pdf" \
 
 COPY --from=builder /install /usr/local
 
+RUN apt-get update && apt-get install -y --no-install-recommends fonts-dejavu-core \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN useradd -m -u 1001 appuser
 USER appuser
 
