@@ -60,7 +60,7 @@ pip install .
 
 **Prebuilt binaries**
 
-Standalone binaries (linux-x64, macos-arm64, windows-x64) are built on every push and attached to [GitHub Releases](https://github.com/monobilisim/gl2pdf/releases) for tagged versions.
+Standalone binaries (linux-x64, macos-arm64, windows-x64) are built and attached to [GitHub Releases](https://github.com/monobilisim/gl2pdf/releases) whenever a `vX.Y.Z` tag is pushed.
 
 ```bash
 curl -LO https://github.com/monobilisim/gl2pdf/releases/latest/download/gl2pdf-linux-x64
@@ -70,7 +70,7 @@ chmod +x gl2pdf-linux-x64
 
 **Docker / GHCR**
 
-A container image is published to GitHub Container Registry on every push to main and on tags.
+A container image is published to GitHub Container Registry whenever a `vX.Y.Z` tag is pushed (tagged `latest` and the version number).
 
 ```bash
 docker pull ghcr.io/monobilisim/gl2pdf:latest
